@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elm-docker-sample-app
+spec:
+  selector:
+    matchLabels:
+      app: elm-frontapp
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: elm-frontapp
+    spec:
+      containers:
+        - name: elm-frontapp
+          image: suito01/elm-docker-sample:latest
+          ports:
+            - containerPort: 30080
+          resources:
+            limits:
+              cpu: 250m
+              memory: 128Mi

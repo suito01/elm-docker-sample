@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elm-docker-sample-lb
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "environment=elm-docker-sample,owner=ccti,lb_type=CLB" #Tags
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    app: elm-frontapp
